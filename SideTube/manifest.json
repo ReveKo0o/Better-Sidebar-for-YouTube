@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "Better-Sidebar-for-YouTube",
+  "version": "1.0",
+  "description": "Better-Sidebar-for-YouTube just idk what to write",
+  "content_scripts": [
+    {
+      "matches": ["https://www.youtube.com/*"],
+      "css": ["style.css"]
+    }
+  ]
+}

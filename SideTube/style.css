@@ -1,0 +1,44 @@
+/* Floating and Framed Side Menu */
+
+/* Make the main drawer structure transparent */
+tp-yt-app-drawer#guide.ytd-app {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+/* Transform the side menu content container into a rounded framed box */
+#guide-content.ytd-app {
+    background-color: #0f0f0f !important;
+    border: 2px solid rgba(255, 255, 255, 0.15) !important;
+    border-radius: 28px !important;
+    margin-top: 70px !important;
+    margin-left: 12px !important;
+    margin-bottom: 20px !important;
+    height: calc(100vh - 90px) !important;
+    width: 235px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+/* Prevent menu contents from overflowing the rounded corners */
+#guide-inner.ytd-app, 
+#sections.ytd-guide-renderer {
+    background-color: transparent !important;
+    border-radius: 28px !important;
+}
+
+/* Top Category Chip Bar */
+#chips-wrapper.ytd-feed-filter-chip-bar-renderer, 
+ytd-feed-filter-chip-bar-renderer {
+    background: transparent !important;
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+}
+
+/* Search Bar */
+ytd-searchbox[desktop-searchbar-style=rounded_corner_borders_light_btn] #container.ytd-searchbox {
+    border-radius: 40px !important;
+    margin-left: 80px !important;
+    padding: 0px 20px 0px 30px !important;
+}
