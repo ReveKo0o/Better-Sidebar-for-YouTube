@@ -18,5 +18,5 @@ Better Sidebar for YouTube is a lightweight and modern browser extension that re
 
 # Built With
 
-* Manifest V2
+* Manifest V3
 * CSS3
