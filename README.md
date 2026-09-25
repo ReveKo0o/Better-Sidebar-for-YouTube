@@ -1,4 +1,4 @@
-# Better Sidebar for YouTube
+# SideTube | Better Sidebar for YouTube
 
 Better Sidebar for YouTube is a lightweight and modern browser extension that redesigns the YouTube interface into a floating, rounded sidebar layout, accompanied by a repositioned search bar and a transparent category filter bar.
 
