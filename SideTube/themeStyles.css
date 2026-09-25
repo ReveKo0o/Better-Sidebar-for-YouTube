@@ -28,8 +28,36 @@ tp-yt-app-drawer#guide.ytd-app {
     /* 3D glass depth with an inner glow and an outer shadow */
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), inset 0 0 30px rgba(255, 255, 255, 0.15) !important;
     
-    overflow-y: auto !important;
+    /* scroll settings over there */
+    overflow-y: scroll !important;
     overflow-x: hidden !important;
+    scrollbar-width: thin !important;
+    scrollbar-color: rgba(255, 255, 255, 0.4) transparent !important;
+    padding-right: 0px !important;
+}
+
+/* Fixing up scrollbar (hoping that wil fix this shit) */
+#guide-content.ytd-app::-webkit-scrollbar {
+    width: 5px !important;
+}
+
+#guide-content.ytd-app::-webkit-scrollbar-track {
+    background: transparent !important;
+}
+
+#guide-content.ytd-app::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3) !important;
+    border-radius: 10px !important;
+}
+
+#guide-content.ytd-app::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.6) !important;
+}
+
+#guide-content.ytd-app::-webkit-scrollbar-button {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
 }
 
 #guide-inner.ytd-app, 
