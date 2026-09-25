@@ -3,68 +3,161 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Liquid Glass Tube</title>
-    <link rel="stylesheet" href="style.css">
+    <title>SideTube - Arka Plan Stüdyosu</title>
+    <style>
+        body {
+            background-color: #0f172a;
+            color: #f8fafc;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+            width: 400px;
+            text-align: center;
+        }
+        h2 { margin-top: 0; font-size: 20px; color: #38bdf8; }
+        .control-group {
+            margin: 15px 0;
+            text-align: left;
+        }
+        label { display: block; font-size: 13px; margin-bottom: 5px; color: #cbd5e1; }
+        input[type="range"], input[type="file"] { width: 100%; box-sizing: border-box; }
+        .preview-box {
+            width: 184px;
+            height: 276px;
+            margin: 20px auto;
+            border-radius: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #000;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        }
+        .btn-download {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            width: 100%;
+            border-radius: 10px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .btn-download:hover { background: #059669; }
+        .info { font-size: 11px; color: #94a3b8; margin-top: 10px; }
+    </style>
 </head>
 <body>
-    <!-- Sıvı hissiyatını veren arka plan renk formları -->
-    <div class="background-blobs">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
-        <div class="blob blob-3"></div>
-    </div>
 
-    <!-- Ana Konteyner -->
     <div class="container">
-        <!-- Üst Menü -->
-        <header class="glass-panel nav">
-            <div class="logo">LiquidTube</div>
-            <input type="text" class="glass-input" placeholder="Ara...">
-            <div class="profile-pic"></div>
-        </header>
+        <h2>SideTube Arka Plan Stüdyosu</h2>
+        <p class="info">Önerilen Çözünürlük: <strong>736x1104 px</strong></p>
 
-        <div class="layout">
-            <!-- Yan Menü -->
-            <aside class="glass-panel sidebar">
-                <ul>
-                    <li>Ana Sayfa</li>
-                    <li>Trendler</li>
-                    <li>Abonelikler</li>
-                    <li>Geçmiş</li>
-                    <li>Kitaplık</li>
-                </ul>
-            </aside>
-
-            <!-- Video Izgarası -->
-            <main class="video-grid">
-                <!-- Video Kartı Örneği -->
-                <div class="glass-panel video-card">
-                    <div class="thumbnail"></div>
-                    <div class="video-info">
-                        <h3>Video Başlığı Burada Yer Alacak</h3>
-                        <p>Kanal Adı</p>
-                        <span>1.2M Görüntülenme • 2 gün önce</span>
-                    </div>
-                </div>
-                <!-- Kartı çoğaltarak ızgarayı doldurabilirsiniz -->
-                <div class="glass-panel video-card">
-                    <div class="thumbnail"></div>
-                    <div class="video-info">
-                        <h3>Başka Bir Video Başlığı</h3>
-                        <p>Kanal Adı</p>
-                        <span>500 B Görüntülenme • 5 saat önce</span>
-                    </div>
-                </div>
-                <div class="glass-panel video-card">
-                    <div class="thumbnail"></div>
-                    <div class="video-info">
-                        <h3>Üçüncü Video Başlığı</h3>
-                        <p>Kanal Adı</p>
-                        <span>3M Görüntülenme • 1 hafta önce</span>
-                    </div>
-                </div>
-            </main>
+        <div class="control-group">
+            <label>Fotoğraf Seç:</label>
+            <input type="file" id="uploadImage" accept="image/*">
         </div>
+
+        <div class="control-group">
+            <label>Opaklık / Karartma:</label>
+            <input type="range" id="opacityRange" min="0" max="1" step="0.05" value="0.4">
+        </div>
+
+        <div class="control-group">
+            <label>Bulanıklık (Blur):</label>
+            <input type="range" id="blurRange" min="0" max="25" step="1" value="0">
+        </div>
+
+        <!-- Canlı Önizleme Alanı -->
+        <div class="preview-box" id="previewBox"></div>
+
+        <button class="btn-download" id="downloadBtn">sidebar-bg.png Olarak İndir</button>
     </div>
+
+    <canvas id="canvas" style="display:none;"></canvas>
+
+    <script>
+        const uploadImage = document.getElementById('uploadImage');
+        const opacityRange = document.getElementById('opacityRange');
+        const blurRange = document.getElementById('blurRange');
+        const previewBox = document.getElementById('previewBox');
+        const downloadBtn = document.getElementById('downloadBtn');
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        let img = new Image();
+        let imageLoaded = false;
+
+        uploadImage.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    img.src = event.target.result;
+                    img.onload = function() {
+                        imageLoaded = true;
+                        updatePreview();
+                    }
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+
+        opacityRange.addEventListener('input', updatePreview);
+        blurRange.addEventListener('input', updatePreview);
+
+        function updatePreview() {
+            if (!imageLoaded) return;
+            
+            const opacity = opacityRange.value;
+            const blurVal = blurRange.value;
+
+            previewBox.style.backgroundImage = `linear-gradient(rgba(0,0,0,${opacity}), rgba(0,0,0,${opacity})), url(${img.src})`;
+            previewBox.style.filter = `blur(${blurVal / 3}px)`;
+        }
+
+        downloadBtn.addEventListener('click', function() {
+            if (!imageLoaded) {
+                alert("Lütfen önce bir fotoğraf seçin!");
+                return;
+            }
+
+            canvas.width = 736;
+            canvas.height = 1104;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const blurVal = blurRange.value;
+            if (blurVal > 0) {
+                ctx.filter = `blur(${blurVal}px)`;
+            } else {
+                ctx.filter = 'none';
+            }
+
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+            ctx.filter = 'none';
+            ctx.fillStyle = `rgba(0, 0, 0, ${opacityRange.value})`;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            const link = document.exports || document.createElement('a');
+            link.download = 'sidebar-bg.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+        });
+    </script>
 </body>
 </html>

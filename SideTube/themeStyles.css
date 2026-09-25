@@ -1,0 +1,63 @@
+/* Floating and Framed Side Menu - Blurred Custom Wallpaper */
+
+tp-yt-app-drawer#guide.ytd-app {
+    background: transparent !important;
+    background-color: transparent !important;
+}
+
+#guide-content.ytd-app {
+    /* Doğru dosya yoluyla görseli çağırıyoruz ve üzerine hafif karartma perdesi ekliyoruz */
+    background-image: linear-gradient(rgba(15, 15, 15, 0.4), rgba(15, 15, 15, 0.4)), url('chrome-extension://__MSG_@@extension_id__/sidebar-bg.png') !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    
+    /* Görselin kendisini yumuşatmak ve cam efekti vermek için filter kullanıyoruz */
+    filter: blur(0px); /* İstersen burayı artırabilirsin ama görselin kendisini harici olarak blurlamak en net sonucu verir */
+    
+    /* iOS tarzı ince parlak cam kenarlığı ve kavisler */
+    border: 1.5px solid rgba(255, 255, 255, 0.3) !important;
+    border-radius: 32px !important;
+    
+    margin-top: 70px !important;
+    margin-left: 12px !important;
+    margin-bottom: 20px !important;
+    height: calc(100vh - 90px) !important;
+    width: 235px !important;
+    
+    /* İçten parlayan 3D cam derinliği ve dış gölge */
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), inset 0 0 30px rgba(255, 255, 255, 0.15) !important;
+    
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+#guide-inner.ytd-app, 
+#sections.ytd-guide-renderer,
+#guide-renderer.ytd-app,
+ytd-guide-renderer,
+#items.ytd-guide-renderer,
+ytd-guide-section-renderer {
+    background-color: transparent !important;
+    background: transparent !important;
+}
+
+#guide-inner.ytd-app, 
+#sections.ytd-guide-renderer {
+    border-radius: 32px !important;
+}
+
+/* Top Category Chip Bar */
+#chips-wrapper.ytd-feed-filter-chip-bar-renderer, 
+ytd-feed-filter-chip-bar-renderer {
+    background: transparent !important;
+    background-color: transparent !important;
+    backdrop-filter: none !important;
+}
+
+/* Search Bar */
+ytd-searchbox[desktop-searchbar-style=rounded_corner_borders_light_btn] #container.ytd-searchbox {
+    border-radius: 40px !important;
+    margin-left: 80px !important;
+    padding: 0px 20px 0px 30px !important;
+}
