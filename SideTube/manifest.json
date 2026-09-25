@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "Better Sidebar for YouTube",
+  "name": "SideTube | Better Sidebar for YouTube",
   "version": "1.0",
-  "description": "YouTube modern floating glass sidebar",
+  "description": "SideTube",
   "browser_action": {
     "default_popup": "popup.html",
     "default_icon": "sidebar-bg.png"

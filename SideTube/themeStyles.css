@@ -6,16 +6,16 @@ tp-yt-app-drawer#guide.ytd-app {
 }
 
 #guide-content.ytd-app {
-    /* Doğru dosya yoluyla görseli çağırıyoruz ve üzerine hafif karartma perdesi ekliyoruz */
+    /* Find/Select file path for image */
     background-image: linear-gradient(rgba(15, 15, 15, 0.4), rgba(15, 15, 15, 0.4)), url('chrome-extension://__MSG_@@extension_id__/sidebar-bg.png') !important;
     background-size: cover !important;
     background-position: center !important;
     background-repeat: no-repeat !important;
     
-    /* Görselin kendisini yumuşatmak ve cam efekti vermek için filter kullanıyoruz */
-    filter: blur(0px); /* İstersen burayı artırabilirsin ama görselin kendisini harici olarak blurlamak en net sonucu verir */
+    /* It is exactly what is written duuh*/
+    filter: blur(0px); /* just dont touch it idk why */
     
-    /* iOS tarzı ince parlak cam kenarlığı ve kavisler */
+    /* iOS-style slim, glossy glass border and curves */
     border: 1.5px solid rgba(255, 255, 255, 0.3) !important;
     border-radius: 32px !important;
     
@@ -25,7 +25,7 @@ tp-yt-app-drawer#guide.ytd-app {
     height: calc(100vh - 90px) !important;
     width: 235px !important;
     
-    /* İçten parlayan 3D cam derinliği ve dış gölge */
+    /* 3D glass depth with an inner glow and an outer shadow */
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.7), inset 0 0 30px rgba(255, 255, 255, 0.15) !important;
     
     overflow-y: auto !important;
